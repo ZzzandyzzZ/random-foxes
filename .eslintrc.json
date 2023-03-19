@@ -19,5 +19,10 @@
     "plugins": [
         "react"
     ],
-    "rules": {}
+    "rules": {
+        "indent": [
+            "error",
+            2
+        ]
+    }
 }
