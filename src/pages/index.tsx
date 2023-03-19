@@ -1,21 +1,32 @@
-import Head from 'next/head'
+import { type NextPage } from 'next'
+import { type MouseEventHandler } from 'react'
 import { useState } from 'react'
+import Head from 'next/head'
 import { RandomFox } from './components/RandomFox'
 
 interface ImageItem {
-  id: number
+  id: string
   url: string
 }
 
+const generateId = (): string => Math.random().toString(36).substring(2, 9)
+
 const random = (): number => Math.floor(Math.random() * 123) + 1
 
-export default function Home (): JSX.Element {
-  const [images, setImages] = useState<ImageItem[]>([
-    { id: 1, url: `https://randomfox.ca/images/${random()}.jpg` },
-    { id: 1, url: `https://randomfox.ca/images/${random()}.jpg` },
-    { id: 1, url: `https://randomfox.ca/images/${random()}.jpg` },
-    { id: 1, url: `https://randomfox.ca/images/${random()}.jpg` }
-  ])
+const Home: NextPage = () => {
+  const [images, setImages] = useState<ImageItem[]>([])
+
+  const addNewFox: MouseEventHandler<HTMLButtonElement> = (event): void => {
+    event.preventDefault()
+    const newFoxItem: ImageItem = {
+      id: generateId(),
+      url: `https://randomfox.ca/images/${random()}.jpg`
+    }
+    setImages([
+      ...images,
+      newFoxItem
+    ])
+  }
   return (
     <>
       <Head>
@@ -25,8 +36,11 @@ export default function Home (): JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main >
+        <h1>Holi  </h1>
+        <button onClick={addNewFox}>Add new fox</button>
         {images.map(({ id, url }) => <RandomFox key={id} srcImage={url}/>)}
       </main>
     </>
   )
 }
+export default Home
