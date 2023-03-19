@@ -35,9 +35,9 @@ const Home: NextPage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main >
-        <h1>Holi  </h1>
-        <button onClick={addNewFox}>Add new fox</button>
+      <main className='flex flex-col items-center'>
+        <h1 className='text-center font-bold text-3xl m-3'>FOX IMAGE LAZY LOADING</h1>
+        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' onClick={addNewFox}>Add new fox</button>
         {images.map(({ id, url }) => <RandomFox key={id} srcImage={url}/>)}
       </main>
     </>
