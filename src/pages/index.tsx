@@ -1,6 +1,16 @@
 import Head from 'next/head'
+import { useState } from 'react'
+import { RandomFox } from './components/RandomFox'
+
+const random = (): number => Math.floor(Math.random() * 123) + 1
 
 export default function Home (): JSX.Element {
+  const [images, setImages] = useState<string[]>([
+    `https://randomfox.ca/images/${random()}.jpg`,
+    `https://randomfox.ca/images/${random()}.jpg`,
+    `https://randomfox.ca/images/${random()}.jpg`,
+    `https://randomfox.ca/images/${random()}.jpg`
+  ])
   return (
     <>
       <Head>
@@ -10,7 +20,7 @@ export default function Home (): JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main >
-        <h1>Holi</h1>
+        {images.map((image, index) => <RandomFox key={index} srcImage={image}/>)}
       </main>
     </>
   )
