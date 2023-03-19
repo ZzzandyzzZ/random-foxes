@@ -2,14 +2,19 @@ import Head from 'next/head'
 import { useState } from 'react'
 import { RandomFox } from './components/RandomFox'
 
+interface ImageItem {
+  id: number
+  url: string
+}
+
 const random = (): number => Math.floor(Math.random() * 123) + 1
 
 export default function Home (): JSX.Element {
-  const [images, setImages] = useState<string[]>([
-    `https://randomfox.ca/images/${random()}.jpg`,
-    `https://randomfox.ca/images/${random()}.jpg`,
-    `https://randomfox.ca/images/${random()}.jpg`,
-    `https://randomfox.ca/images/${random()}.jpg`
+  const [images, setImages] = useState<ImageItem[]>([
+    { id: 1, url: `https://randomfox.ca/images/${random()}.jpg` },
+    { id: 1, url: `https://randomfox.ca/images/${random()}.jpg` },
+    { id: 1, url: `https://randomfox.ca/images/${random()}.jpg` },
+    { id: 1, url: `https://randomfox.ca/images/${random()}.jpg` }
   ])
   return (
     <>
@@ -20,7 +25,7 @@ export default function Home (): JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main >
-        {images.map((image, index) => <RandomFox key={index} srcImage={image}/>)}
+        {images.map(({ id, url }) => <RandomFox key={id} srcImage={url}/>)}
       </main>
     </>
   )
